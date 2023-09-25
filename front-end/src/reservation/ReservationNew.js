@@ -16,6 +16,7 @@ export default function ReservationNew() {
   });
   const history = useHistory();
   const changeHandler = (e) => {
+    console.log(e.target.value);
     if (e.target.name === "people") {
       setReservation({
         ...reservation,
@@ -30,6 +31,7 @@ export default function ReservationNew() {
   };
   const submitHandler = async (e) => {
     e.preventDefault();
+    console.log("submitted");
   };
   return (
     <section>
