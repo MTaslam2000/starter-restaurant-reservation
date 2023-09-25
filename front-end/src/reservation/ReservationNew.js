@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min.js";
+import ReservationForm from "./ReservationForm.js";
 
 export default function ReservationNew() {
   let initalState = {
@@ -14,18 +15,30 @@ export default function ReservationNew() {
     ...initalState,
   });
   const history = useHistory();
-  const changeHandler = (event) => {
-    if (event.target.name === "people") {
+  const changeHandler = (e) => {
+    if (e.target.name === "people") {
       setReservation({
         ...reservation,
-        [event.target.name]: Number(event.target.value),
+        [e.target.name]: Number(e.target.value),
       });
     } else {
       setReservation({
         ...reservation,
-        [event.target.name]: event.target.value,
+        [e.target.name]: e.target.value,
       });
     }
   };
-  return <section>hiiii</section>;
+  const submitHandler = async (e) => {
+    e.preventDefault();
+  };
+  return (
+    <section>
+      To make a Reservation:
+      <ReservationForm
+        reservation={reservation}
+        changeHandler={changeHandler}
+        submitHandler={submitHandler}
+      />
+    </section>
+  );
 }
