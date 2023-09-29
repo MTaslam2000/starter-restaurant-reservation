@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min.js";
 import ReservationForm from "./ReservationForm.js";
+import { createReservation } from "../utils/api.js";
 
 export default function ReservationNew() {
   let initalState = {
@@ -16,7 +17,7 @@ export default function ReservationNew() {
   });
   const history = useHistory();
   const changeHandler = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     if (e.target.name === "people") {
       setReservation({
         ...reservation,
@@ -32,6 +33,16 @@ export default function ReservationNew() {
   const submitHandler = async (e) => {
     e.preventDefault();
     console.log("submitted");
+
+    const abortController = new AbortController();
+
+    try {
+      await createReservation(reservation, abortController.signal);
+      history.push(`/dashboard?date=${reservation.reservation_date}`);
+    } catch (err) {
+      throw "something bad happened";
+    }
+    return () => abortController.abort();
   };
   return (
     <section>
