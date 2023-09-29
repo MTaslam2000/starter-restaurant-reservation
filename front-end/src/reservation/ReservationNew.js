@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min.js";
 import ReservationForm from "./ReservationForm.js";
 import { createReservation } from "../utils/api.js";
+import { hasValidDateAndTime } from "./ReservationValidate.js";
 
 export default function ReservationNew() {
   let initalState = {
@@ -12,6 +13,7 @@ export default function ReservationNew() {
     reservation_time: "",
     people: 0,
   };
+  const [reservationErrors, setReservationErrors] = useState(null);
   let [reservation, setReservation] = useState({
     ...initalState,
   });
@@ -30,20 +32,29 @@ export default function ReservationNew() {
       });
     }
   };
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    console.log("submitted");
-
+  const submitHandler = async (event) => {
+    event.preventDefault();
+    console.log(reservation);
     const abortController = new AbortController();
 
-    try {
-      await createReservation(reservation, abortController.signal);
-      history.push(`/dashboard?date=${reservation.reservation_date}`);
-    } catch (err) {
-      throw "something bad happened";
+    const errors = hasValidDateAndTime(reservation);
+    if (errors.length) {
+      return setReservationErrors(errors);
     }
+
+    try {
+      await createReservation(reservation, abortController.signal).then(
+        console.log("it is working")
+      );
+      history.push(`/dashboard?date=${reservation.reservation_date}`);
+    } catch (error) {
+      console.log(error);
+      setReservationErrors([error]);
+    }
+
     return () => abortController.abort();
   };
+
   return (
     <section>
       To make a Reservation:
