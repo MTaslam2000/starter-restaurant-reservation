@@ -211,7 +211,7 @@ async function read(req, res) {
 
 module.exports = {
   list: [asyncErrorBoundary(list)],
-  read: [reservationExists, asyncErrorBoundary(read)],
+  read: [asyncErrorBoundary(reservationExists), asyncErrorBoundary(read)],
   create: [
     hasOnlyValidProperties,
     hasRequiredProperties,
@@ -232,7 +232,7 @@ module.exports = {
     asyncErrorBoundary(update),
   ],
   updateStatus: [
-    reservationExists,
+    asyncErrorBoundary(reservationExists),
     hasValidStatus,
     asyncErrorBoundary(updateStatus),
   ],

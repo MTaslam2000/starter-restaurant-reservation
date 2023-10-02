@@ -85,7 +85,7 @@ module.exports = {
   update: [
     asyncErrorBoundary(tableExists),
     hasReservationId,
-    reservationsController.reservationExists,
+    asyncErrorBoundary(reservationsController.reservationExists),
     hasSufficientCapacity,
     tableIsNotSeated,
     tableIsFree,
