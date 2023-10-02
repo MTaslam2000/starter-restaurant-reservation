@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min.js";
 import ReservationForm from "./ReservationForm.js";
 import { createReservation } from "../utils/api.js";
 import { hasValidDateAndTime } from "./ReservationValidate.js";
+import ReservationErrors from "./ReservationErrors.js";
 
 export default function ReservationNew() {
   let initalState = {
@@ -34,7 +35,6 @@ export default function ReservationNew() {
   };
   const submitHandler = async (event) => {
     event.preventDefault();
-    console.log(reservation);
     const abortController = new AbortController();
 
     const errors = hasValidDateAndTime(reservation);
@@ -43,12 +43,9 @@ export default function ReservationNew() {
     }
 
     try {
-      await createReservation(reservation, abortController.signal).then(
-        console.log("it is working")
-      );
+      await createReservation(reservation, abortController.signal);
       history.push(`/dashboard?date=${reservation.reservation_date}`);
     } catch (error) {
-      console.log(error);
       setReservationErrors([error]);
     }
 
@@ -58,6 +55,7 @@ export default function ReservationNew() {
   return (
     <section>
       To make a Reservation:
+      <ReservationErrors errors={reservationErrors} />
       <ReservationForm
         reservation={reservation}
         changeHandler={changeHandler}
