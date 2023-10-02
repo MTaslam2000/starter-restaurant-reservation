@@ -24,6 +24,14 @@ function list(reservation_date) {
     .orderBy("reservation_time");
 }
 
+function updateStatus(reservation_id, status) {
+  return knex("reservations")
+    .select("*")
+    .where({ reservation_id })
+    .update({ status: status }, "*")
+    .then((createdRecords) => createdRecords[0]);
+}
+
 function read(reservation_id) {
   return knex("reservations").select("*").where({ reservation_id }).first();
 }
@@ -44,4 +52,5 @@ module.exports = {
   search,
   read,
   update,
+  updateStatus,
 };
