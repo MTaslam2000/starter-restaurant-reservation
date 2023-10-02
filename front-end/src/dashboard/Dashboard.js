@@ -65,7 +65,6 @@ function Dashboard({ date }) {
     }
   };
 
-  console.log(reservations);
   return (
     <main>
       <ErrorAlert error={reservationsError} />
