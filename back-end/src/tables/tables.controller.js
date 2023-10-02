@@ -53,6 +53,23 @@ function tableIsNotSeated(req, res, next) {
   }
   next();
 }
+function tableIsOccupied(req, res, next) {
+  if (!res.locals.table.occupied) {
+    return next({
+      status: 400,
+      message: `Table is not occupied`,
+    });
+  }
+  next();
+}
+
+async function finish(req, res) {
+  const data = await tablesService.finish(
+    res.locals.table.reservation_id,
+    res.locals.table.table_id
+  );
+  res.status(200).json({ data });
+}
 
 async function update(req, res) {
   const { reservation_id } = req.body.data;
@@ -73,5 +90,10 @@ module.exports = {
     tableIsNotSeated,
     tableIsFree,
     asyncErrorBoundary(update),
+  ],
+  finish: [
+    asyncErrorBoundary(tableExists),
+    tableIsOccupied,
+    asyncErrorBoundary(finish),
   ],
 };
