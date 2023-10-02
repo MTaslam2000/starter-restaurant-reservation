@@ -7,12 +7,25 @@ function create(reservation) {
     .then((createdRecords) => createdRecords[0]);
 }
 
+function update(updatedRes) {
+  console.log("updatedRes", updatedRes);
+  return knex("reservations")
+    .select("*")
+    .where({ reservation_id: updatedRes.reservation_id })
+    .update(updatedRes, "*")
+    .then((createdRecords) => createdRecords[0]);
+}
+
 function list(reservation_date) {
   return knex("reservations")
     .select("*")
     .where({ reservation_date: reservation_date })
     .whereNot({ status: "finished" })
     .orderBy("reservation_time");
+}
+
+function read(reservation_id) {
+  return knex("reservations").select("*").where({ reservation_id }).first();
 }
 
 function search(mobile_number) {
@@ -29,4 +42,6 @@ module.exports = {
   create,
   list,
   search,
+  read,
+  update,
 };

@@ -183,13 +183,28 @@ async function list(req, res) {
   }
 }
 
+async function update(req, res) {
+  const updatedRes = {
+    ...req.body.data,
+    reservation_id: res.locals.reservation.reservation_id,
+  };
+  const data = await reservationsService.update(updatedRes);
+  res.status(200).json({ data });
+}
+
 async function create(req, res) {
   const data = await reservationService.create(req.body.data);
   res.status(201).json({ data });
 }
 
+async function read(req, res) {
+  const data = res.locals.reservation;
+  res.json({ data });
+}
+
 module.exports = {
   list: [asyncErrorBoundary(list)],
+  read: [reservationExists, asyncErrorBoundary(read)],
   create: [
     hasOnlyValidProperties,
     hasRequiredProperties,
@@ -199,4 +214,15 @@ module.exports = {
     isBooked,
     asyncErrorBoundary(create),
   ],
+  update: [
+    hasOnlyValidProperties,
+    hasRequiredProperties,
+    hasValidDate,
+    hasValidTime,
+    hasValidNumber,
+    reservationExists,
+    hasValidStatus,
+    asyncErrorBoundary(update),
+  ],
+  reservationExists,
 };
