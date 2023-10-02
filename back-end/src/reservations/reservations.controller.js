@@ -152,7 +152,7 @@ async function reservationExists(req, res, next) {
   const reservation_id =
     req.params.reservation_id || (req.body.data || {}).reservation_id;
 
-  const reservation = await reservationsService.read(reservation_id);
+  const reservation = await reservationService.read(reservation_id);
   if (reservation) {
     res.locals.reservation = reservation;
     return next();
@@ -188,7 +188,7 @@ async function update(req, res) {
     ...req.body.data,
     reservation_id: res.locals.reservation.reservation_id,
   };
-  const data = await reservationsService.update(updatedRes);
+  const data = await reservationService.update(updatedRes);
   res.status(200).json({ data });
 }
 
