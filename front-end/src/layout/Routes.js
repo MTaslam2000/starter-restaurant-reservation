@@ -9,6 +9,7 @@ import Search from "../search/search.js";
 import useQuery from "../utils/useQuery.js";
 import ReservationEdit from "../reservation/ReservationEdit.js";
 import ReservationSeat from "../reservation/ReservationSeat.js";
+import TablesNew from "../tables/TablesNew.js";
 /**
  * Defines all the routes for the application.
  *
@@ -39,6 +40,9 @@ function Routes() {
       </Route>
       <Route path="/reservations/:reservation_id/edit">
         <ReservationEdit />
+      </Route>
+      <Route path="/tables/new">
+        <TablesNew />
       </Route>
       <Route path="/search">
         <Search />
