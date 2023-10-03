@@ -22,7 +22,7 @@ export default function TablesList({ tables, finishHandler }) {
                 </div>
               </div>
               <div className="item">
-                {table.reservation_id ? (
+                {table && table.reservation_id ? (
                   <button
                     className="finish"
                     data-table-id-finish={table.table_id}

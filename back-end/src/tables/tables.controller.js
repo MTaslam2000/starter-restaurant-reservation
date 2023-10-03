@@ -36,7 +36,7 @@ function hasSufficientCapacity(req, res, next) {
 }
 
 function tableIsFree(req, res, next) {
-  if (res.locals.table.occupied) {
+  if (res.locals.table.reservation_id) {
     return next({
       status: 400,
       message: `Table is occupied`,
@@ -55,7 +55,7 @@ function tableIsNotSeated(req, res, next) {
   next();
 }
 function tableIsOccupied(req, res, next) {
-  if (!res.locals.table.occupied) {
+  if (!res.locals.table.reservation_id) {
     return next({
       status: 400,
       message: `Table is not occupied`,

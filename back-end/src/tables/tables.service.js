@@ -19,9 +19,6 @@ function finish(reservation_id, table_id) {
       .select("*")
       .where({ table_id })
       .update({ reservation_id: null }, "*")
-      .update({
-        occupied: knex.raw("NOT ??", ["occupied"]),
-      })
       .transacting(trx)
       .then((createdRecords) => createdRecords[0]);
   });
