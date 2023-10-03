@@ -17,8 +17,12 @@ export default function ReservationSeat() {
   }, []);
 
   useEffect(() => {
-    readReservation(reservation_id).then(setReservation);
+    if (reservation_id) {
+      readReservation(reservation_id).then(setReservation);
+    }
   }, [reservation_id]);
+
+  console.log(reservation);
 
   const changeHandler = (event) => {
     setTableId(event.target.value);
@@ -28,7 +32,7 @@ export default function ReservationSeat() {
     event.preventDefault();
     event.stopPropagation();
 
-    await updateTable(reservation.reservation_id, tableId);
+    await updateTable(reservation_id, tableId);
     history.push("/dashboard");
   };
 

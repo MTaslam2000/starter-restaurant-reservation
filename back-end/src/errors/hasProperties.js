@@ -17,4 +17,6 @@ function hasProperties(...properties) {
   };
 }
 
+// data[0].reservation_id
+
 module.exports = hasProperties;

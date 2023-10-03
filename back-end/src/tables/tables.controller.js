@@ -16,9 +16,10 @@ async function tableExists(req, res, next) {
   const table = await tablesService.read(table_id);
   if (table) {
     res.locals.table = table;
-    return next();
+    next();
+  } else {
+    next({ status: 404, message: `Table ${table_id} cannot be found.` });
   }
-  next({ status: 404, message: `Table ${table_id} cannot be found.` });
 }
 
 function hasSufficientCapacity(req, res, next) {
