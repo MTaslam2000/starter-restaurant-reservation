@@ -1,5 +1,5 @@
 const tablesService = require("./tables.service.js");
-const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
+const asyncErrorBoundary = require("../errors/abc.js");
 const hasProperties = require("../errors/hasProperties.js");
 const reservationsController = require("../reservations/reservations.controller.js");
 
