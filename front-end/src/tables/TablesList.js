@@ -24,7 +24,7 @@ export default function TablesList({ tables, finishHandler }) {
               <div className="item">
                 {table && table.reservation_id ? (
                   <button
-                    className="finish"
+                    className="finish btn btn-danger"
                     data-table-id-finish={table.table_id}
                     onClick={() => finishHandler(table.table_id)}
                   >

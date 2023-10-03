@@ -67,7 +67,9 @@ export default function ReservationEdit() {
 
   return (
     <section>
-      <h2>Edit Reservation:</h2>
+      <h2>
+        <span className="oi oi-pencil"></span> Edit Reservation:
+      </h2>
       <ReservationErrors errors={reservationErrors} />
       <ReservationForm
         reservation={reservation}

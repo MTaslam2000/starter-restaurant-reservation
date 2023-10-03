@@ -78,26 +78,40 @@ function Dashboard({ date }) {
             </div>
             <div className="item centered">
               <div className="group-row">
-                <button
-                  className="item black"
-                  onClick={() =>
-                    history.push(`/dashboard?date=${previous(date)}`)
-                  }
-                >
-                  Previous
-                </button>
-                <button
-                  className="item black"
-                  onClick={() => history.push(`/dashboard?date=${today()}`)}
-                >
-                  Today
-                </button>
-                <button
-                  className="item black"
-                  onClick={() => history.push(`/dashboard?date=${next(date)}`)}
-                >
-                  Next
-                </button>
+                <div className="breacrumbs">
+                  <ol className="breadcrumb">
+                    <li className="breadcrumb-item">
+                      <button
+                        className="item black"
+                        onClick={() =>
+                          history.push(`/dashboard?date=${previous(date)}`)
+                        }
+                      >
+                        Previous
+                      </button>
+                    </li>
+                    <li className="breadcrumb-item">
+                      <button
+                        className="item black"
+                        onClick={() =>
+                          history.push(`/dashboard?date=${today()}`)
+                        }
+                      >
+                        Today
+                      </button>
+                    </li>
+                    <li className="breadcrumb-item">
+                      <button
+                        className="item black"
+                        onClick={() =>
+                          history.push(`/dashboard?date=${next(date)}`)
+                        }
+                      >
+                        Next
+                      </button>
+                    </li>
+                  </ol>
+                </div>
               </div>
             </div>
           </div>

@@ -62,19 +62,21 @@ export default function ReservationsList({
                 {reservation.status === "booked" ? (
                   <div className="group-reverse">
                     <Link
-                      className="item button-link"
+                      type="item button-link"
+                      className="btn btn-primary"
                       to={`/reservations/${reservation.reservation_id}/seat`}
                     >
                       Seat
                     </Link>
                     <Link
-                      className="item button-link"
+                      type="item button-link"
+                      className="btn btn-dark mx-2"
                       to={`/reservations/${reservation.reservation_id}/edit`}
                     >
-                      Edit
+                      <span className="oi oi-pencil"></span> Edit
                     </Link>
                     <button
-                      className="item black"
+                      className="btn btn-danger item black"
                       type="button"
                       data-reservation-id-cancel={reservation.reservation_id}
                       value={reservation.reservation_id}
