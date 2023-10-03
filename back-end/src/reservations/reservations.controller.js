@@ -2,7 +2,7 @@
  * List handler for reservation resources
  */
 const reservationService = require("./reservations.service.js");
-const asyncErrorBoundary = require("../errors/abc.js");
+const asyncErrorBoundary = require("../errors/asyncErrorBoundary.js");
 const hasProperties = require("../errors/hasProperties.js");
 
 const hasRequiredProperties = hasProperties(
