@@ -46,9 +46,17 @@ function update(reservation_id, table_id) {
   });
 }
 
+function create(table) {
+  return knex("tables")
+    .insert(table)
+    .returning("*")
+    .then((createdRecords) => createdRecords[0]);
+}
+
 module.exports = {
   list,
   read,
   update,
   finish,
+  create,
 };

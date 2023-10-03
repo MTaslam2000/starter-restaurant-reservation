@@ -80,8 +80,43 @@ async function update(req, res) {
   res.status(200).json({ data });
 }
 
+function hasValidCapacity(req, res, next) {
+  const capacity = req.body.data.capacity;
+
+  if (capacity < 1 || isNaN(capacity)) {
+    return next({
+      status: 400,
+      message: `Invalid capacity`,
+    });
+  }
+  next();
+}
+
+function hasValidName(req, res, next) {
+  const table_name = req.body.data.table_name;
+
+  if (table_name.length < 2) {
+    return next({
+      status: 400,
+      message: `Invalid table_name`,
+    });
+  }
+  next();
+}
+
+async function create(req, res) {
+  const data = await tablesService.create(req.body.data);
+  res.status(201).json({ data });
+}
+
 module.exports = {
   list: asyncErrorBoundary(list),
+  create: [
+    hasRequiredProperties,
+    hasValidName,
+    hasValidCapacity,
+    asyncErrorBoundary(create),
+  ],
   update: [
     asyncErrorBoundary(tableExists),
     hasReservationId,

@@ -1,3 +1,15 @@
-export default function TableErrors() {
-  return <div>errorssssss</div>;
+export default function TableErrors({ errors }) {
+  if (errors !== null) {
+    if (errors.length) {
+      return (
+        <div className="alert alert-danger">
+          <p>ERROR:</p>
+          {errors.map((error) => (
+            <p key={errors.indexOf(error)}>{error.message}</p>
+          ))}
+        </div>
+      );
+    }
+  }
+  return null;
 }
