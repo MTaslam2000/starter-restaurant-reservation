@@ -22,8 +22,6 @@ export default function ReservationSeat() {
     }
   }, [reservation_id]);
 
-  console.log(reservation);
-
   const changeHandler = (event) => {
     setTableId(event.target.value);
   };

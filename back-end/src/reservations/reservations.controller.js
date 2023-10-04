@@ -75,13 +75,6 @@ function hasValidTime(req, res, next) {
   const { data = {} } = req.body;
   const time = data["reservation_time"];
 
-  if (!/^([0-1][0-9]|2[0-3]):([0-5][0-9])$/.test(time)) {
-    next({
-      status: 400,
-      message: `Invalid reservation_time`,
-    });
-  }
-
   const hours = Number(time.split(":")[0]);
   const minutes = Number(time.split(":")[1]);
   if (hours < 10 || (hours === 10 && minutes < 30)) {
@@ -166,17 +159,14 @@ async function reservationExists(req, res, next) {
 async function list(req, res) {
   const date = req.query.date;
   const mobile_number = req.query.mobile_number;
-  // console.log(date);
   if (date) {
     const data = await reservationService.list(date);
-    // console.log(data, "date");
     res.json({
       data: data,
     });
   }
   if (mobile_number) {
     const data = await reservationService.search(mobile_number);
-    // console.log(data, "number");
     res.json({
       data: data,
     });

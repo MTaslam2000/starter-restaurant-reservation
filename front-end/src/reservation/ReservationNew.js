@@ -20,7 +20,6 @@ export default function ReservationNew() {
   });
   const history = useHistory();
   const changeHandler = (e) => {
-    // console.log(e.target.value);
     if (e.target.name === "people") {
       setReservation({
         ...reservation,

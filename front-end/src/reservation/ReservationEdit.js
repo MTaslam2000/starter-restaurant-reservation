@@ -59,6 +59,7 @@ export default function ReservationEdit() {
       await updateReservation(reservation, abortController.signal);
       history.push(`/dashboard?date=${reservation.reservation_date}`);
     } catch (error) {
+      console.log(error);
       setReservationErrors([error]);
     }
 
