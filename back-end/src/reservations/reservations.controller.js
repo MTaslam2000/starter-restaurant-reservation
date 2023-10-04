@@ -4,6 +4,7 @@
 const reservationService = require("./reservations.service.js");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary.js");
 const hasProperties = require("../errors/hasProperties.js");
+const moment = require("moment");
 
 const hasRequiredProperties = hasProperties(
   "first_name",
@@ -71,12 +72,19 @@ function hasValidDate(req, res, next) {
   next();
 }
 
+function isValidMilitaryTime(time) {
+  return (
+    moment(time, "HH:mm", true).isValid() ||
+    moment(time, "HH:mm:ss", true).isValid()
+  );
+}
+
 function hasValidTime(req, res, next) {
   const { data = {} } = req.body;
   const time = data["reservation_time"];
 
   console.log(time);
-  if (!/^([0-1][0-9]|2[0-3]):[0-5][0-9]$/.test(time)) {
+  if (!isValidMilitaryTime(time)) {
     next({
       status: 400,
       message: `Invalid reservation_time`,
