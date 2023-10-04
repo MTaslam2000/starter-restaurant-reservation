@@ -75,6 +75,14 @@ function hasValidTime(req, res, next) {
   const { data = {} } = req.body;
   const time = data["reservation_time"];
 
+  console.log(time);
+  if (!/^([0-1][0-9]|2[0-3]):[0-5][0-9]$/.test(time)) {
+    next({
+      status: 400,
+      message: `Invalid reservation_time`,
+    });
+  }
+
   const hours = Number(time.split(":")[0]);
   const minutes = Number(time.split(":")[1]);
   if (hours < 10 || (hours === 10 && minutes < 30)) {
