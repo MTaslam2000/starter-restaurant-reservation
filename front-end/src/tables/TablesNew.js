@@ -72,7 +72,10 @@ export default function TableNew() {
             />
           </div>
           <div className="group-row">
-            <button className="btn btn-light" onClick={() => history.goBack()}>
+            <button
+              className="btn btn-danger black"
+              onClick={() => history.goBack()}
+            >
               Cancel
             </button>
             <button className="btn btn-success mx-3" type="submit">

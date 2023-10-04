@@ -63,15 +63,13 @@ export default function ReservationSeat() {
           </div>
           <div className="group-row">
             <button
-              className="black"
+              className="white"
               type="button"
               onClick={() => history.goBack()}
             >
               Cancel
             </button>
-            <button className="yellow" type="submit">
-              Submit
-            </button>
+            <button className="btn btn-success">Submit</button>
           </div>
         </fieldset>
       </form>

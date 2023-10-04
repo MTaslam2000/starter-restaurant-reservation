@@ -35,7 +35,7 @@ export default function ReservationsList({
           <div className="reservation" key={reservation.reservation_id}>
             <div className="group">
               <div className="item-quad">
-                <div className="group-col no-gap">
+                <div className="group-col">
                   <div>
                     <h4 className="inline">
                       {reservation.first_name} {reservation.last_name}{" "}

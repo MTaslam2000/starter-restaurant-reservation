@@ -9,11 +9,11 @@ export default function ReservationForm({
   const history = useHistory();
 
   return (
-    <div>
+    <div className="formDiv">
       Fill out this Form:
       <form onSubmit={submitHandler}>
         <fieldset>
-          <div>
+          <div className="flexItem">
             <label htmlFor="first_name">First Name: </label>
             <input
               id="first_name"
@@ -25,7 +25,7 @@ export default function ReservationForm({
               maxLength="150"
             />
           </div>
-          <div>
+          <div className="flexItem">
             <label htmlFor="last_name">Last Name: </label>
             <input
               id="last_name"
@@ -37,7 +37,7 @@ export default function ReservationForm({
               maxLength="150"
             />
           </div>
-          <div>
+          <div className="flexItem">
             <label htmlFor="mobile_number">Mobile Number: </label>
             <input
               id="mobile_number"
@@ -49,8 +49,8 @@ export default function ReservationForm({
               maxLength="150"
             />
           </div>
-          <div>
-            <label htmlFor="reservation_date">reservation_date: </label>
+          <div className="flexItem">
+            <label htmlFor="reservation_date">Reservation Date: </label>
             <input
               id="reservation_date"
               name="reservation_date"
@@ -62,8 +62,8 @@ export default function ReservationForm({
               pattern="\d{4}-\d{2}-\d{2}"
             />
           </div>
-          <div>
-            <label htmlFor="reservation_time">Reservation_Time: </label>
+          <div className="flexItem">
+            <label htmlFor="reservation_time">Reservation Time: </label>
             <input
               id="reservation_time"
               name="reservation_time"
@@ -75,7 +75,7 @@ export default function ReservationForm({
               onChange={changeHandler}
             />
           </div>
-          <div>
+          <div className="flexItem">
             <label htmlFor="people">People Expected: </label>
             <input
               id="people"
@@ -88,13 +88,15 @@ export default function ReservationForm({
             />
           </div>
           <button
-            className="red"
+            className="item black btn btn-danger"
             type="button"
             onClick={() => history.goBack()}
           >
             Cancel
           </button>
-          <button type="submit">Submit</button>
+          <button type="submit" className="btn btn-success">
+            Submit
+          </button>
         </fieldset>
       </form>
     </div>
