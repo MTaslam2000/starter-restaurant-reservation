@@ -84,7 +84,7 @@ async function update(req, res) {
 function hasValidCapacity(req, res, next) {
   const capacity = req.body.data.capacity;
 
-  if (capacity < 1 || isNaN(capacity)) {
+  if (capacity < 1 || !Number.isInteger(capacity)) {
     return next({
       status: 400,
       message: `Invalid capacity`,
