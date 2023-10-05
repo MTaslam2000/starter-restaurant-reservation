@@ -55,14 +55,21 @@ function Dashboard({ date }) {
   }
 
   const cancelHandler = async (event) => {
+    const abortController = new AbortController();
     const result = window.confirm(
       "Do you want to cancel this reservation? This cannot be undone."
     );
 
     if (result) {
-      await updateStatus(event.target.value, "cancelled");
+      await updateStatus(
+        event.target.value,
+        "cancelled",
+        abortController.signal
+      );
       loadDashboard();
     }
+
+    return () => abortController.abort();
   };
 
   return (

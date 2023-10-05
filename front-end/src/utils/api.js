@@ -72,12 +72,13 @@ export async function listTables(params, signal) {
   return await fetchJson(url, { headers, signal }, []);
 }
 
-export async function updateStatus(reservation_id, status) {
+export async function updateStatus(reservation_id, status, signal) {
   const url = `${API_BASE_URL}/reservations/${reservation_id}/status`;
   const options = {
     method: "PUT",
     body: JSON.stringify({ data: { status } }),
     headers,
+    signal, // Pass the AbortController signal to the fetch request
   };
   return await fetchJson(url, options);
 }
@@ -118,12 +119,13 @@ export async function readReservation(reservation_id, signal) {
     .then(formatReservationTime);
 }
 
-export async function updateTable(reservation_id, table_id) {
+export async function updateTable(reservation_id, table_id, signal) {
   const url = `${API_BASE_URL}/tables/${table_id}/seat`;
   const options = {
     method: "PUT",
     body: JSON.stringify({ data: { reservation_id } }),
     headers,
+    signal, // Pass the AbortController signal to the fetch request
   };
   return await fetchJson(url, options);
 }

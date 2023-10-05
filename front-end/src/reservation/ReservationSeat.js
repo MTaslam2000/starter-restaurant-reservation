@@ -30,8 +30,14 @@ export default function ReservationSeat() {
     event.preventDefault();
     event.stopPropagation();
 
-    await updateTable(reservation_id, tableId);
-    history.push("/dashboard");
+    const abortController = new AbortController();
+
+    if ((reservation_id, tableId)) {
+      await updateTable(reservation_id, tableId, abortController.signal);
+      history.push("/dashboard");
+    }
+
+    return () => abortController.abort();
   };
 
   return (
@@ -48,17 +54,18 @@ export default function ReservationSeat() {
               onChange={changeHandler}
             >
               <option value="">- Select a table -</option>
-              {tables.map((table) => (
-                <option
-                  key={table.table_id}
-                  value={table.table_id}
-                  disabled={
-                    table.capacity < reservation.people || table.occupied
-                  }
-                >
-                  {table.table_name} - {table.capacity}
-                </option>
-              ))}
+              {tables &&
+                tables.map((table) => (
+                  <option
+                    key={table.table_id}
+                    value={table.table_id}
+                    disabled={
+                      table.capacity < reservation.people || table.occupied
+                    }
+                  >
+                    {table.table_name} - {table.capacity}
+                  </option>
+                ))}
             </select>
           </div>
           <div className="group-row">
